@@ -1,0 +1,109 @@
+<div id="search_container"></div>
+
+<script type="text/javascript">
+
+SearchView = Backbone.View.extend({
+  initialize: function(){
+    alert("Alerts suck");
+  }
+})
+
+//set view's 'el' property when creating a view
+var search_view = new SearchView({el: $("#search_container")});
+
+</script>
+
+
+<!-- Loading a Template -->
+
+<script type="text/template" id="search_template">
+  <label>Search</label>
+  <input type="text" id="search_input" />
+  <input type="button" id="search_button" value="Search"/>
+</script>
+
+<div id="search_container"></div>
+
+<script type="text/javascript">
+  SearchView = Backbone.View.extend({
+    initialize: function(){
+      this.render();
+    },
+    render: function(){
+      //compile template using underscore
+      var template = _.template( $("#search_template").html(), {} );
+      //load compiled HTML into the Backbone 'el'
+      this.$el.html( template )
+    }
+  });
+
+  var search_view = new SearchView({el: $("#search_container")})
+</script>
+
+
+<!-- Listening for Events -->
+
+<script type="text/javascript">
+  SearchView = Backbone.View.extend({
+    initialize: function(){
+      this.render();
+    },
+
+    render: function(){
+      //compile template using underscore
+      var template = _.template( $("#search_template").html(), {} );
+      //load compiled HTML into the Backbone 'el'
+      this.$el.html( template )
+    },
+
+    events: {
+      "click input[type=button]": "doSearch"
+    },
+
+    doSearch: function(event){
+      //Button clicked, access element that was clicked with event.currentTarget
+      alert("Search for " + $("#search_input").val() );
+    }
+  });
+
+  var search_view = new SearchView({el: $("#search_container")})
+</script>
+
+
+<!-- Using Template Variables -->
+
+<script type="text/template" id = "search_template">
+  // Access template variables with <%=  %>
+  <label><%= search_label %></label>
+  <input type="text" id="search_input">
+  <input type="button" id="search_button" value="Search">
+</script>
+
+<div id="search_container"></div>
+
+<script type="text/javacript">
+  SearchView = Backbone.View.extend({
+    initialize: function(){
+      this.render();
+    },
+
+    render: function(){
+      //pass variables in using Underscore.js template
+      var variables = {search_label: "My Search"};
+      //compile the template using underscore
+      var template = _.template( $("#search_template").html(), variables);
+      //load compiled HTML into Backbone el
+      this.$el.html( template );
+    },
+
+    events: {
+      "click input[type=button]": "doSearch"
+    },
+
+    doSearch: function(event){
+      alert("search for " + $("#search_input").val());
+    }
+  });
+
+  var search_view = new SearchView({ el: $("#search_container") });
+</script>
